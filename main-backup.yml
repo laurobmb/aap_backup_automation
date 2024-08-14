@@ -24,11 +24,11 @@
       ansible.builtin.find:
         paths: "{{ aap_backup_dest }}"
         age: 3d
-        recursive: true
-      register: filesOlderThan
+        recurse: true
+      register: filesolderthan
 
     - name: Remove older than 10
       ansible.builtin.file:
         path: "{{ item.path }}"
         state: absent
-      with_items: "{{ filesOlderThan.files }}"
+      with_items: "{{ filesolderthan.files }}"
