@@ -23,8 +23,15 @@
     - name: comando localhost
       ansible.builtin.shell: ls -lh "{{ aap_setup_prep_setup_dir }}"
       register: ls
-    
+
+    - name: comando localhost
+      ansible.builtin.shell: ls -lh "{{ aap_backup_dest }}"
+      register: ls2
+
     - name: debug
       ansible.builtin.debug:
         var: ls
 
+    - name: debug
+      ansible.builtin.debug:
+        var: ls2
