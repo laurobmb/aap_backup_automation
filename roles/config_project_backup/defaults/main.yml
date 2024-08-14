@@ -28,7 +28,7 @@ project_job_templates:
   - name: main-backup
     inventory: "{{ project_inventory }}"
     project: "{{ project_git.name }}"
-    playbook: playbooks/main-backup.yml
+    playbook: main-backup.yml
     credentials: AcessoHosts
     execution_environment: "{{ project_execution_environments[0].name }}"
 
