@@ -19,19 +19,16 @@
     - name: Backup
       ansible.builtin.import_role:
         name: infra.aap_utilities.aap_backup
-    
-    - name: comando localhost
-      ansible.builtin.shell: ls -lh "{{ aap_setup_prep_setup_dir }}"
-      register: ls
 
-    - name: comando localhost
-      ansible.builtin.shell: ls -lh "{{ aap_backup_dest }}"
-      register: ls2
+    - name: Find all files that are older than 10 days
+      ansible.builtin.find:
+        paths: "{{ aap_backup_dest }}"
+        age: 3d
+        recursive: true
+      register: filesOlderThan
 
-    - name: debug
-      ansible.builtin.debug:
-        var: ls
-
-    - name: debug
-      ansible.builtin.debug:
-        var: ls2
+    - name: Remove older than 10
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ filesOlderThan.files }}"
