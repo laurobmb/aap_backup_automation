@@ -19,3 +19,12 @@
     - name: Backup
       ansible.builtin.import_role:
         name: infra.aap_utilities.aap_backup
+    
+    - name: comando localhost
+      ansible.builtin.shell: ls -lh "{{ aap_setup_prep_setup_dir }}"
+      register: ls
+    
+    - name: debug
+      ansible.builtin.debug:
+        var: ls
+
