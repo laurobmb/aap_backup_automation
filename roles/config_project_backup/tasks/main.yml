@@ -26,3 +26,6 @@
 
 - name: Create Workflow
   ansible.builtin.import_tasks: projeto_backup_workflow_job_templates.yml
+
+- name: Create Scheduler
+  ansible.builtin.import_tasks: projeto_backup_scheduler.yml

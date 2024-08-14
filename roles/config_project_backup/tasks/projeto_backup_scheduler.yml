@@ -1,0 +1,14 @@
+---
+
+- name: Build a schedule for Demo Job Template
+  ansible.controller.schedule:
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    controller_host: "{{ controller_host }}"
+    validate_certs: "{{ validate_certs }}"
+    description: "{{ description_project }}"
+    name: schedule-todo-dia
+    state: present
+    unified_job_template: "Automation - Backup AAP"
+    rrule: "DTSTART;TZID=America/Recife:20240814T001500 RRULE:INTERVAL=1;FREQ=DAILY"
+  register: result
