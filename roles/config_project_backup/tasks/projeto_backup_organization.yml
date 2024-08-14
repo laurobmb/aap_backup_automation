@@ -1,0 +1,10 @@
+---
+- name: Create organizations DEVOPS
+  ansible.controller.organization:
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    controller_host: "{{ controller_host }}"
+    validate_certs: "{{ validate_certs }}"
+    name: "{{ organization }}"
+    description: "{{ description_project }}"
+    state: "{{ config_aap_estado }}"

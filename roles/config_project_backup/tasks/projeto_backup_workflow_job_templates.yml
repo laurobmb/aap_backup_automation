@@ -1,0 +1,59 @@
+---
+
+- name: Create workflow job template main-haproxy
+  ansible.controller.workflow_job_template:
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    controller_host: "{{ controller_host }}"
+    validate_certs: "{{ validate_certs }}"
+    organization: "{{ organization }}"
+    description: "{{ description_project }}"
+    state: "{{ config_aap_estado }}"
+
+    name: Automation - Backup AAP
+    extra_vars:
+      chave: valor
+    survey_enabled: false
+    allow_simultaneous: false
+    ask_variables_on_launch: true
+    ask_tags_on_launch: true
+    inventory: "{{ project_inventory }}"
+    limit:
+    scm_branch:
+    ask_inventory_on_launch: false
+    ask_scm_branch_on_launch: false
+    ask_limit_on_launch: false
+#    webhook_service: ''
+    webhook_credential:
+#    organization:
+#      name: "{{ organization }}"
+    workflow_nodes:
+      - identifier: "{{ project_git.name }}"
+        unified_job_template:
+          organization:
+            name: "{{ organization }}"
+          name: "{{ project_git.name }}"
+          type: project
+        related:
+          failure_nodes: []
+          always_nodes: []
+          credentials: []
+          success_nodes:
+            - identifier: "{{ project_job_templates[0].name }}"
+
+      - identifier: "{{ project_job_templates[0].name }}"
+        unified_job_template:
+          organization:
+            name: "{{ organization }}"
+          name: "{{ project_job_templates[0].name }}"
+          type: job_template
+        inventory:
+          name: "{{ project_inventory }}"
+          organization:
+            name: "{{ organization }}"
+        related:
+          success_nodes: []
+          failure_nodes: []
+          credentials: []
+          always_nodes: []
+

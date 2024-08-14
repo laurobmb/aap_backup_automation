@@ -1,0 +1,28 @@
+---
+
+- name: Create Organizatrion
+  ansible.builtin.import_tasks: projeto_backup_organization.yml
+
+- name: Create inventory
+  ansible.builtin.import_tasks: projeto_backup_inventories.yml
+
+- name: Create hosts
+  ansible.builtin.import_tasks: projeto_backup_hosts.yml
+
+- name: Create groups
+  ansible.builtin.import_tasks: projeto_backup_groups.yml
+
+- name: Create credentials
+  ansible.builtin.import_tasks: projeto_backup_credentials.yml
+
+- name: Create Executions Environment
+  ansible.builtin.import_tasks: projeto_backup_execution_environments.yml
+
+- name: Create Project
+  ansible.builtin.import_tasks: projeto_backup_projects.yml
+
+- name: Create job templates
+  ansible.builtin.import_tasks: projeto_backup_job_templates.yml
+
+- name: Create Workflow
+  ansible.builtin.import_tasks: projeto_backup_workflow_job_templates.yml

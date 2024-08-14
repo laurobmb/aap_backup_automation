@@ -1,0 +1,6 @@
+---
+- name: Register maquinas
+  hosts: automationcontroller
+  gather_facts: false
+  roles:
+    - role: backup_aap

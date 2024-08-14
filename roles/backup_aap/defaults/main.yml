@@ -1,0 +1,3 @@
+---
+aap_setup_prep_setup_dir: /opt/aap/
+aap_backup_dest: /root/backups

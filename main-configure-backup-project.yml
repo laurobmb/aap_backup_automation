@@ -1,0 +1,14 @@
+---
+
+- name: MAIN CONFIG BACKUP PROJECT
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    controller_username: admin
+    controller_password: r3dh4t1!
+    controller_host: https://controller01.localnet.local
+    validate_certs: false
+
+  roles:
+    - role: config_project_backup

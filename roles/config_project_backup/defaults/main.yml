@@ -1,0 +1,34 @@
+---
+description_project: "cac projeto de backup"
+config_aap_estado: present
+organization: devops-backup-aap
+project_inventory: backup_aap_inventory
+
+project_git:
+  name: tech-aap-cac
+  url: https://github.com/laurobmb/aap_backup_automation.git
+  #credential: ''
+  branch: main
+  organization: "{{ organization }}"
+
+project_hosts:
+  - name: controller01.localnet.local
+    enabled: true
+    ipv4: 192.168.183.11
+    group: automationcontroller
+    inventory: "{{ project_inventory }}"
+
+project_execution_environments:
+  - name: ee-cac-rhel9
+    image: quay.io/lagomes/ee-cac-rhel9:v3
+    pull: missing
+    credential: ''
+
+project_job_templates:
+  - name: main-backup
+    inventory: "{{ project_inventory }}"
+    project: "{{ project_git.name }}"
+    playbook: playbooks/main-backup.yml
+    credentials: AcessoHosts
+    execution_environment: "{{ project_execution_environments[0].name }}"
+
